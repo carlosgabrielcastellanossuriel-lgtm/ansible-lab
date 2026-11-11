@@ -113,6 +113,12 @@ wsl -d Ubuntu -- bash -lc "cd '/mnt/c/Users/user/Proyectos/Electiva 2/ansible-la
 wsl -d Ubuntu -- bash -lc "cd '/mnt/c/Users/user/Proyectos/Electiva 2/ansible-lab' && ansible-playbook -i inventory.ini playbook.yml"
 ```
 
-## Captura de la ejecucion
+## Capturas de la ejecucion
 
-![Ejecucion exitosa del playbook](captura.png)
+Ejecucion exitosa del playbook (parte 1: tareas):
+
+![Ejecucion exitosa del playbook - tareas](Capturas/Captura1.png)
+
+Ejecucion exitosa del playbook (parte 2: mensaje de Ubuntu y PLAY RECAP):
+
+![Ejecucion exitosa del playbook - PLAY RECAP](Capturas/Captura2.png)
