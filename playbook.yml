@@ -1,0 +1,57 @@
+---
+# Playbook de la practica: tareas basicas sobre los contenedores Docker
+- name: Practica de Ansible sobre contenedores Docker
+  hosts: docker
+  # Necesario para conocer el sistema operativo (ansible_distribution)
+  gather_facts: true
+
+  tasks:
+    # 1. Mostrar el nombre del host
+    - name: Mostrar el nombre del host
+      ansible.builtin.debug:
+        msg: "Nombre del host: {{ inventory_hostname }}"
+
+    # 2. Mostrar el sistema operativo
+    - name: Mostrar el sistema operativo
+      ansible.builtin.debug:
+        msg: "Sistema operativo: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
+
+    # 3. Crear el directorio /tmp/ansible-demo
+    - name: Crear el directorio /tmp/ansible-demo
+      ansible.builtin.file:
+        path: /tmp/ansible-demo
+        state: directory
+        mode: "0755"
+
+    # 4. Crear el archivo info.txt
+    - name: Crear el archivo info.txt
+      ansible.builtin.file:
+        path: /tmp/ansible-demo/info.txt
+        state: touch
+        mode: "0644"
+
+    # 5. Escribir el nombre del servidor y el sistema operativo
+    - name: Escribir el nombre del servidor y el sistema operativo
+      ansible.builtin.copy:
+        content: |
+          Servidor: {{ inventory_hostname }}
+          Sistema operativo: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}
+        dest: /tmp/ansible-demo/info.txt
+        mode: "0644"
+
+    # 6. Crear los directorios logs, backup y config con un loop
+    - name: Crear los directorios con un loop
+      ansible.builtin.file:
+        path: "/tmp/ansible-demo/{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - logs
+        - backup
+        - config
+
+    # 7. Mostrar un mensaje solo cuando el sistema operativo sea Ubuntu
+    - name: Mostrar un mensaje solo en Ubuntu
+      ansible.builtin.debug:
+        msg: "Este servidor esta ejecutando Ubuntu"
+      when: ansible_facts['distribution'] == "Ubuntu"

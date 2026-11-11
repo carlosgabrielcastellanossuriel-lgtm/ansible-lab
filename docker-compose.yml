@@ -1,0 +1,13 @@
+services:
+  # Contenedor que hara el papel de servidor 1
+  server1:
+    image: ubuntu:24.04
+    container_name: server1
+    # Evita que el contenedor termine al no tener procesos
+    command: sleep infinity
+
+  # Contenedor que hara el papel de servidor 2
+  server2:
+    image: ubuntu:24.04
+    container_name: server2
+    command: sleep infinity

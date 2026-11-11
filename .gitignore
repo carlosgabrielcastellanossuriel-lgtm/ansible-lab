@@ -1,0 +1,5 @@
+# Carpeta generada por Visual Studio
+.vs/
+
+# Archivos de log
+*.log
